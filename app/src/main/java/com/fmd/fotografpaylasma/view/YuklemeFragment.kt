@@ -95,6 +95,8 @@ class YuklemeFragment : Fragment() {
         val uuid= UUID.randomUUID()
         val gorselAdi="${uuid}.jpg"
 
+        val yorum=binding.commentText.text.toString()
+
         val reference=storage.reference
         val gorselReferansi=reference.child("images").child(gorselAdi)
         if(secilenGorsel!=null){
@@ -108,7 +110,7 @@ class YuklemeFragment : Fragment() {
                         val postMap= hashMapOf<String,Any>()
                         postMap.put("DownloadUrl",downloadUrl)
                         postMap.put("email",auth.currentUser!!.email.toString())
-                        postMap.put("comment",binding.commentText.toString())
+                        postMap.put("comment",yorum)
                         postMap.put("date", Timestamp.now())
 
                         db.collection("Posts").add(postMap).addOnSuccessListener { documentReferance->
